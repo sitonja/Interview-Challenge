@@ -16,7 +16,7 @@ export class MembershipService implements IMembershipService {
         const userId = 2000;
 
         const membership = MembershipContainerMapper.toDomain(createMembershipDto, userId)    
-        return  this.membershipRepo.create(membership)
+        return this.membershipRepo.create(membership)
     }
 
     fetchAllMemberships(): MembershipContainer[] {
