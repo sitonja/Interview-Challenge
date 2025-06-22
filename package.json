@@ -7,8 +7,7 @@
     "start": "ts-node src/server.ts",
     "build": "tsc",
     "serve": "node dist/server.js",
-    "test": "jest",
-    "test:e2e": "jest --config  ./jest.e2e.config.ts"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",

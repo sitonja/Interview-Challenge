@@ -1,8 +1,9 @@
-import express, { Request, Response } from "express"
-import { MembershipController } from "../controllers/membershipController";
-import { MembershipService } from "../services/MembershipService";
-import { Database } from "../db/Database";
-import { MembershipRepository } from "../repositories/MembershipRepository";
+import express from "express"
+import { MembershipController } from "../controllers/membership.controller";
+import { MembershipService } from "../services/membership.service";
+import { MembershipRepository } from "../repositories/membership.repository";
+import { Database } from "../db/database";
+
 const router = express.Router();
 
 const db = new Database()
