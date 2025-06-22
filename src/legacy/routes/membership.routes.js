@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
     return res.status(400).json({ message: "negativeRecurringPrice" });
   }
 
-  if (req.body.recurringPrice > 100 && req.body.paymentMethod === 'cash') {
+  if (req.body.recurringPrice < 100 && req.body.paymentMethod === 'cash') {
     return res.status(400).json({ message: "cashPriceBelow100" });
   }
 

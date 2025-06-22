@@ -1,6 +1,7 @@
 import { formatDate } from "../../utils/date.util";
 import { MembershipPeriod } from "../domain/membership-period";
 import { MembershipPeriodDto } from "../dtos/membership-period.dto";
+const { v4: uuidv4 } = require('uuid');
 import { MembershipPeriodEntity } from "../entities/membership-period.entity";
 
 export class MembershipPeriodMapper {
@@ -27,7 +28,14 @@ export class MembershipPeriodMapper {
             }
     }
     
-    static toEntity() {
-    
+    static toEntity(membershipPeriod: MembershipPeriod): MembershipPeriodEntity {
+       return {
+                id: 0,
+                uuid: uuidv4(),
+                membershipId: membershipPeriod.membershipId,
+                start: formatDate(membershipPeriod.start),
+                end: formatDate(membershipPeriod.end),
+                state: membershipPeriod.state,
+            }
     }
 }

@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { MembershipService } from "../services/membership.service";
 import { MembershipMapper } from "../models/mappers/membership.mapper";
 import { MembershipPeriodMapper } from "../models/mappers/membership-period.mapper";
+import { membershipSchema } from "../schema/membership.schema";
 
 export class MembershipController {
   constructor(private membershipService: MembershipService) {}
@@ -20,6 +21,11 @@ export class MembershipController {
   }
   
  createMembership = (req: Request, res: Response) => {
-    throw new Error('not implemented')
+    const result = membershipSchema.safeParse(req.body)
+    if (!result.success) {
+      return res.status(400).json({message: result.error.issues[0].message})
+    } 
+    const mem = this.membershipService.createMembership(req.body)  
+    return res.status(201).json(mem);
   }
 }  

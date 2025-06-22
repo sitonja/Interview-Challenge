@@ -1,10 +1,8 @@
 import { Database } from "../db/database";
-import { Membership } from "../models/domain/membership";
 import { MembershipContainer } from "../models/domain/membership-container";
 import { MembershipEntity } from "../models/entities/membership.entity";
 import { MembershipPeriodMapper } from "../models/mappers/membership-period.mapper";
 import { MembershipMapper } from "../models/mappers/membership.mapper";
-const { v4: uuidv4 } = require('uuid');
 
 import { IMembershipRepository } from "./interfaces/IMembershipRepository"
 
@@ -22,32 +20,18 @@ export class MembershipRepository implements IMembershipRepository {
         })
     }
 
-    create(membershipContainer: MembershipContainer): Membership {
+    create(membershipContainer: MembershipContainer): MembershipContainer {
         const membership = membershipContainer.membership
-        const memEntity: MembershipEntity = {
-            ...membership,
-            id: this.db.membershipsSequence,
-            uuid: uuidv4(),
-            validFrom: membership.validFrom.toDateString(),
-            validUntil: membership.validUntil.toDateString(),
-            user: membership.user,
-            assignedBy: "Admin"
-        }
+        const memEntity: MembershipEntity = MembershipMapper.toEntity(membership)
 
         this.db.memberships.push(memEntity)
 
         const periods = membershipContainer.periods
         periods.forEach(period => {
-            this.db.periods.push(
-                {
-                    ...period,
-                    id: this.db.periodsSequence,
-                    uuid: uuidv4(),
-                    start: period.start.toDateString(),
-                    end: period.end.toDateString()
-                })
+            const periodEntity = MembershipPeriodMapper.toEntity(period)
+            this.db.periods.push(periodEntity)
         })
-        return membership;
+        return {membership, periods: periods};
     }
 
 }

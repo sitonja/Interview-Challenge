@@ -2,6 +2,7 @@ import { formatDate } from "../../utils/date.util";
 import { Membership } from "../domain/membership";
 import { MembershipDto } from "../dtos/membership.dto";
 import { MembershipEntity } from "../entities/membership.entity";
+const { v4: uuidv4 } = require('uuid');
 
 export class MembershipMapper {
 
@@ -39,8 +40,21 @@ export class MembershipMapper {
         }
     }
     
-    static toEntity() {
-    
+    static toEntity(membership: Membership): MembershipEntity {
+        return {
+            id: 0,
+            uuid: uuidv4(),
+            name: membership.name,
+            validFrom: formatDate(membership.validFrom),
+            validUntil: formatDate(membership.validUntil),
+            user: membership.user,
+            recurringPrice: membership.recurringPrice,
+            state: membership.state,
+            paymentMethod: membership.paymentMethod,
+            billingInterval: membership.billingInterval,
+            billingPeriods: membership.billingPeriods,
+            assignedBy: "Admin"
+        }
     }
 
 }
