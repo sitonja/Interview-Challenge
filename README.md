@@ -118,3 +118,24 @@ We believe that great developers are not bound to a specific technology set, but
 - Jest - https://jestjs.io/
 
 Best of luck and looking forward to what you are able to accomplish! 🙂
+
+
+---
+
+## Modern System Summary
+
+To validate and reverse-engineer the legacy code I decided to do partly `Test Driven Development` and first write e2e tests. That is why I choose to use the package `supertest` with which I can test the rest endpoints.
+
+I choose to modernize the app with Layered Architecture separating the concerns with `Controllers`, `Services`, and `Repositories`. Each layer has it`s own models: 
+
+* Controllers -> Dto
+* Services -> Domain Models
+* Repositories -> Entities
+
+To make the mapper modular I added a separate `Mappers` classes that map the objects between different layers.
+
+I was thinking to use a package for dependency injection, but in the end, I choose to do it manually in `membership.routes.ts`. 
+
+I also choose to include package `Zod` because it gives me an efficient and easier way to manage different validations on the object. 
+
+Although it does not provide currently much I added `dotenv` package to separate my environment variables from the source code.

@@ -12,6 +12,4 @@ app.use('/memberships', membershipRoutes);
 app.use('/legacy/memberships', legacyMembershipRoutes);
 app.use(errorHandler);
 
-
-
 export default app;
