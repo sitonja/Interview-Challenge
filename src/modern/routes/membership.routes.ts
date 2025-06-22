@@ -6,6 +6,7 @@ import { Database } from "../db/database";
 
 const router = express.Router();
 
+// Depencdency injection done manually, I was thinking to take a library, but ended to do it this way 
 const db = new Database()
 const membershipRepository = new MembershipRepository(db)
 const membershipService = new MembershipService(membershipRepository)

@@ -9,7 +9,6 @@ export class MembershipController {
 
   getMemberships = (req: Request, res: Response) => {
     let mems = this.membershipService.fetchAllMemberships()
-    
     const membershipDto = mems.map(me => {
       return {
         membership: MembershipMapper.toDto(me.membership),

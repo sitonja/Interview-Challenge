@@ -1,6 +1,4 @@
-import { Membership } from "../models/domain/membership";
 import { MembershipContainer } from "../models/domain/membership-container";
-import { MembershipPeriod } from "../models/domain/membership-period";
 import { CreateMembershipDto } from "../models/dtos/create-membership.dto";
 import { MembershipContainerMapper } from "../models/mappers/membership-container.mapper";
 import { IMembershipRepository } from "../repositories/interfaces/IMembershipRepository";
@@ -20,7 +18,7 @@ export class MembershipService implements IMembershipService {
         return  this.membershipRepo.create(membership)
     }
 
-    fetchAllMemberships(): {membership: Membership, periods: MembershipPeriod[]}[] {
+    fetchAllMemberships(): MembershipContainer[] {
         return this.membershipRepo.findAll();
     }
 }

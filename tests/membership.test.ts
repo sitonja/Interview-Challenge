@@ -4,15 +4,6 @@ import membershipMock from './data/memberships.test.json';
 
 describe('Membership API', () => {
     const baseUrl = ""
-    let server: any
-    
-    beforeEach(() => {
-        server = app.listen(3000) 
-    });
-
-    afterEach(() => {
-        server.close()
-    })
 
     it('GET memberships return status Ok', async () => {
         const res = await request(app).get(`${baseUrl}/memberships`);

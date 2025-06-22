@@ -1,0 +1,1 @@
+export type BillingInterval = "yearly" | "monthly" | "weekly"

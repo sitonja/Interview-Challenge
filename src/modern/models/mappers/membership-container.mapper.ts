@@ -1,6 +1,9 @@
+import { BillingInterval } from "../domain/billing-interval";
 import { Membership } from "../domain/membership";
 import { MembershipContainer } from "../domain/membership-container";
 import { MembershipPeriod } from "../domain/membership-period";
+import { MembershipState } from "../domain/membership-state";
+import { PaymentMethod } from "../domain/payment-method";
 import { CreateMembershipDto } from "../dtos/create-membership.dto";
 const { v4: uuidv4 } = require('uuid');
 
@@ -42,8 +45,8 @@ export class MembershipContainerMapper {
         },  
     } 
 
-    static mapState(validFrom: Date, billingInterval: string, billingPeriods: number): "active" | "pending" | "expired" {
-        let state: "active" | "pending" | "expired" = "active"
+    static mapState(validFrom: Date, billingInterval: string, billingPeriods: number): MembershipState {
+        let state: MembershipState = "active"
            if (validFrom > new Date()) {
             state = 'pending'
         }
@@ -64,7 +67,7 @@ export class MembershipContainerMapper {
 
         let state = this.mapState(validFrom, createMembershipDto.billingInterval, createMembershipDto.billingPeriods)
 
-        const newMembership = {
+        const newMembership: Membership = {
             id: 0,
             uuid: uuidv4(),
             name: createMembershipDto.name,
@@ -72,11 +75,12 @@ export class MembershipContainerMapper {
             validFrom: validFrom,
             validUntil: validUntil,
             user: userId,
-            paymentMethod: createMembershipDto.paymentMethod,
+            paymentMethod: createMembershipDto.paymentMethod as  PaymentMethod,
             recurringPrice:createMembershipDto.recurringPrice,
             billingPeriods: createMembershipDto.billingPeriods,
-            billingInterval: createMembershipDto.billingInterval,
-        } as Membership;
+            billingInterval: createMembershipDto.billingInterval as BillingInterval,
+            assignedBy: "Admin" 
+        };
 
 
          const membershipPeriods: MembershipPeriod[] = []

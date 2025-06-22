@@ -1,3 +1,7 @@
+import { BillingInterval } from "../domain/billing-interval"
+import { MembershipState } from "../domain/membership-state"
+import { PaymentMethod } from "../domain/payment-method"
+
 export interface MembershipEntity {
     id: number
     uuid: string
@@ -6,9 +10,9 @@ export interface MembershipEntity {
     recurringPrice: number // price the user has to pay for every period
     validFrom: string // start of the validity
     validUntil: string // end of the validity
-    state: "pending" | "active" | "expired" // indicates the state of the membership
+    state: MembershipState // indicates the state of the membership
     assignedBy: string
-    paymentMethod: "cash" | "credit card" | null  // which payment method will be used to pay for the periods
-    billingInterval:"yearly" | "monthly" | "weekly"  // the interval unit of the periods
+    paymentMethod: PaymentMethod  // which payment method will be used to pay for the periods
+    billingInterval: BillingInterval  // the interval unit of the periods
     billingPeriods: number // the number of periods the membership has
 }

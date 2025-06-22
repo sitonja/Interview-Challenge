@@ -1,0 +1,1 @@
+export type MembershipState = "pending" | "active" | "expired"
