@@ -26,18 +26,16 @@ router.post("/", (req, res) => {
     if (req.body.billingPeriods > 12) {
       return res.status(400).json({ message: "billingPeriodsMoreThan12Months" });
     }
-    if (req.billingPeriods < 6) {
+    if (req.body.billingPeriods < 6) {
       return res.status(400).json({ message: "billingPeriodsLessThan6Months" });
     }
   } else if (req.body.billingInterval === 'yearly') {
-    if (req.body.billingPeriods > 3) {
       if (req.body.billingPeriods > 10) {
         return res.status(400).json({ message: "billingPeriodsMoreThan10Years" });
-      } else {
+      } else if (req.body.billingPeriods < 3) {
         return res.status(400).json({ message: "billingPeriodsLessThan3Years" });
       }
-    }
-  } else {
+  } else if (req.body.billingInterval !== 'weekly') {
     return res.status(400).json({ message: "invalidBillingPeriods" });
   }
 

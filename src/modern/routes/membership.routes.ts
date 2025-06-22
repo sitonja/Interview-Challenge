@@ -1,15 +1,17 @@
 import express, { Request, Response } from "express"
-import memberships from "../../data/memberships.json"
-import membershipPeriods from "../../data/membership-periods.json"
-
+import { MembershipController } from "../controllers/membershipController";
+import { MembershipService } from "../services/MembershipService";
+import { Database } from "../db/Database";
+import { MembershipRepository } from "../repositories/MembershipRepository";
 const router = express.Router();
 
-router.get("/", (req: Request, res: Response) => {
-  throw new Error('not implemented')
-})
+const db = new Database()
+const membershipRepository = new MembershipRepository(db)
+const membershipService = new MembershipService(membershipRepository)
+const membershipController = new MembershipController(membershipService)
 
-router.post("/", (req: Request, res: Response) => {
-  throw new Error('not implemented')
-})
+router.get("/", membershipController.getMemberships)
+
+router.post("/", membershipController.createMembership)
 
 export default router;
