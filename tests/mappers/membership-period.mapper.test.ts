@@ -13,7 +13,7 @@ describe('MembershipPeriodMapper', () => {
   const entity: MembershipPeriodEntity = {
     id: 1,
     uuid: 'uuid-123',
-    membershipId: 100,
+    membershipId: 1,
     start: start.toISOString(),
     end: end.toISOString(),
     state: 'planned',
@@ -22,7 +22,7 @@ describe('MembershipPeriodMapper', () => {
   const domain: MembershipPeriod = {
     id: 1,
     uuid: 'uuid-123',
-    membershipId: 100,
+    membershipId: 1,
     start,
     end,
     state: 'planned',
@@ -48,10 +48,10 @@ describe('MembershipPeriodMapper', () => {
     });
 
      it('should map domain to entity with new uuid and formatted dates', () => {
-      const result = MembershipPeriodMapper.toEntity(domain);
+      const result = MembershipPeriodMapper.toEntity(domain, 1, 1);
 
       expect(result).toEqual({
-        id: 0,
+        id: 1,
         uuid: 'mocked-uuid',
         membershipId: domain.membershipId,
         start: '2025-01-01',

@@ -61,7 +61,7 @@ describe('MembershipRepository', () => {
 
      it('should persist membership and periods and return the container', () => {
       const membership: Membership = {
-        id: 0,
+        id: 4,
         uuid: 'mocked-uuid',
         name: 'Silver',
         user: 2,
@@ -76,9 +76,9 @@ describe('MembershipRepository', () => {
       };
 
       const period: MembershipPeriod = {
-        id: 0,
+        id: 4,
         uuid: 'mocked-uuid',
-        membershipId: 1,
+        membershipId: 4,
         start: new Date('2025-01-01'),
         end: new Date('2025-02-01'),
         state: 'planned'

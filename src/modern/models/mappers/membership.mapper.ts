@@ -40,9 +40,9 @@ export class MembershipMapper {
         }
     }
     
-    static toEntity(membership: Membership): MembershipEntity {
+    static toEntity(membership: Membership, id: number): MembershipEntity {
         return {
-            id: 0,
+            id: id,
             uuid: uuidv4(),
             name: membership.name,
             validFrom: formatDate(membership.validFrom),

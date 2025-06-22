@@ -22,13 +22,16 @@ export class MembershipRepository implements IMembershipRepository {
 
     create(membershipContainer: MembershipContainer): MembershipContainer {
         const membership = membershipContainer.membership
-        const memEntity: MembershipEntity = MembershipMapper.toEntity(membership)
-
+        
+        this.db.membershipsSequenceIndex += 1
+        const memEntity: MembershipEntity = MembershipMapper.toEntity(membership, this.db.membershipsSequenceIndex)
+        
         this.db.memberships.push(memEntity)
 
         const periods = membershipContainer.periods
         periods.forEach(period => {
-            const periodEntity = MembershipPeriodMapper.toEntity(period)
+            this.db.periodsSequenceIndex += 1
+            const periodEntity = MembershipPeriodMapper.toEntity(period, this.db.periodsSequenceIndex, memEntity.id)
             this.db.periods.push(periodEntity)
         })
         return {membership, periods: periods};

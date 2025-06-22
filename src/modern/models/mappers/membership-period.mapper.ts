@@ -28,11 +28,11 @@ export class MembershipPeriodMapper {
             }
     }
     
-    static toEntity(membershipPeriod: MembershipPeriod): MembershipPeriodEntity {
+    static toEntity(membershipPeriod: MembershipPeriod, periodId: number, membershipId: number): MembershipPeriodEntity {
        return {
-                id: 0,
+                id: periodId,
                 uuid: uuidv4(),
-                membershipId: membershipPeriod.membershipId,
+                membershipId: membershipId,
                 start: formatDate(membershipPeriod.start),
                 end: formatDate(membershipPeriod.end),
                 state: membershipPeriod.state,

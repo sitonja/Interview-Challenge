@@ -1,3 +1,4 @@
+import { Membership } from "../models/domain/membership";
 import { MembershipContainer } from "../models/domain/membership-container";
 import { CreateMembershipDto } from "../models/dtos/create-membership.dto";
 import { MembershipContainerMapper } from "../models/mappers/membership-container.mapper";

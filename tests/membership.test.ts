@@ -30,6 +30,7 @@ describe('Membership API', () => {
         expect(fetchRes.status).toBe(200);
         expect(fetchRes.body.length).toEqual(4);
         expect(fetchRes.body[fetchRes.body.length - 1].periods).toBeTruthy();
+
         expect(fetchRes.body[fetchRes.body.length - 1].periods.length).toBe(12);
     })
 

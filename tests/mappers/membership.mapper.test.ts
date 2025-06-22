@@ -59,7 +59,7 @@ describe('MembershipMapper', () => {
 
     it('should convert Membership domain to MembershipEntity', () => {
 
-        const result = MembershipMapper.toEntity(domain);
+        const result = MembershipMapper.toEntity(domain, 0);
 
         expect(result).toEqual({
             id: 0,
