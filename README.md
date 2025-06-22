@@ -132,7 +132,7 @@ I choose to modernize the app with Layered Architecture separating the concerns 
 * Services -> Domain Models
 * Repositories -> Entities
 
-To make the mapper modular I added a separate `Mappers` classes that map the objects between different layers.
+To map the objects between different layers I added separate `Mappers` classes to make the mappings modular.
 
 I was thinking to use a package for dependency injection, but in the end, I choose to do it manually in `membership.routes.ts`. 
 
