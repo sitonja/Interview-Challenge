@@ -184,6 +184,6 @@ describe('Membership API', () => {
             .send(membership))
 
         expect(res.status).toBe(400);
-        expect(res.body).toEqual({ message: "invalidBillingPeriods" })
+        expect(res.body).toEqual({ message: "invalidBillingInterval" })
     })
 })

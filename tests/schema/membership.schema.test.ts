@@ -7,7 +7,7 @@ describe('membershipSchema', () => {
     paymentMethod: 'credit card',
     billingInterval: 'monthly',
     billingPeriods: 6,
-    validFrom: new Date()
+    validFrom: "2025-01-01"
   };
 
     it('should pass with valid data', () => {
@@ -38,6 +38,7 @@ describe('membershipSchema', () => {
   it('should fail if billingInterval is yearly and billingPeriods > 10', () => {
     const result = membershipSchema.safeParse({
       ...baseData,
+
       billingInterval: 'yearly',
       billingPeriods: 11
     });
@@ -92,6 +93,6 @@ describe('membershipSchema', () => {
       billingInterval: 'daily'
     });
     expect(result.success).toBe(false);
-    expect(result.error?.issues[0].message).toBe('invalidBillingPeriods');
+    expect(result.error?.issues[0].message).toBe('invalidBillingInterval');
   });
 })

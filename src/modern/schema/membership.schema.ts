@@ -5,7 +5,7 @@ export const membershipSchema = z.object({
   recurringPrice: z.number().positive(),
   paymentMethod: z.enum(["cash", "credit card"]).optional(),
   billingInterval: z.enum(["weekly", "monthly", "yearly"], {
-    message: "invalidBillingPeriods"
+    message: "invalidBillingInterval"
   }),
   billingPeriods: z.number().positive(),
   validFrom: z.string().optional()
