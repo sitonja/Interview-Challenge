@@ -8,7 +8,7 @@ export const membershipSchema = z.object({
     message: "invalidBillingPeriods"
   }),
   billingPeriods: z.number().positive(),
-  validFrom: z.date().optional()
+  validFrom: z.string().optional()
 }).refine((data) => !(data.paymentMethod === "cash" && data.recurringPrice < 100), {
     message: "cashPriceBelow100"
 }).refine((data) => !(data.billingInterval === "monthly" && data.billingPeriods < 6), {

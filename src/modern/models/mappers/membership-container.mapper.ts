@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 
 export class MembershipContainerMapper {
 
-    static mapValidUntilForMembership: {[key:string]: (validFrom: Date, billingPeriods: number) => Date} = {
+    static mapValidUntilForMembership: {[key in BillingInterval]: (validFrom: Date, billingPeriods: number) => Date} = {
         "monthly": (validFrom: Date, billingPeriods: number) => {
             const validUntil = new Date(validFrom);
             validUntil.setMonth(validFrom.getMonth() + billingPeriods)
@@ -20,14 +20,14 @@ export class MembershipContainerMapper {
             validUntil.setMonth(validFrom.getMonth() + billingPeriods * 12);
             return validUntil
         }, 
-        "weeky": (validFrom: Date, billingPeriods: number) => {
+        "weekly": (validFrom: Date, billingPeriods: number) => {
             const validUntil = new Date(validFrom);
             validUntil.setDate(validFrom.getDate() + billingPeriods * 7);
             return validUntil
         },  
     } 
 
-        static mapValidUntilForPeriod: {[key:string]: (validFrom: Date) => Date} = {
+        static mapValidUntilForPeriod: {[key in BillingInterval]: (validFrom: Date) => Date} = {
         "monthly": (validFrom: Date) => {
             const validUntil = new Date(validFrom);
             validUntil.setMonth(validFrom.getMonth() + 1)
@@ -38,14 +38,14 @@ export class MembershipContainerMapper {
             validUntil.setMonth(validFrom.getMonth() + 12);
             return validUntil
         }, 
-        "weeky": (validFrom: Date) => {
+        "weekly": (validFrom: Date) => {
             const validUntil = new Date(validFrom);
             validUntil.setDate(validFrom.getDate() + 7);
             return validUntil
         },  
     } 
 
-    static mapState(validFrom: Date, billingInterval: string, billingPeriods: number): MembershipState {
+    static mapState(validFrom: Date, billingInterval: BillingInterval, billingPeriods: number): MembershipState {
         let state: MembershipState = "active"
            if (validFrom > new Date()) {
             state = 'pending'

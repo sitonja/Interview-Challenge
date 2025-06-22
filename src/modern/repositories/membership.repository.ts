@@ -36,9 +36,11 @@ export class MembershipRepository implements IMembershipRepository {
         for (let index = 0; index < periods.length; index++) {
             const period = periods[index];
             this.db.periodsSequenceIndex += 1
+
             const periodEntity = MembershipPeriodMapper.toEntity(period, this.db.periodsSequenceIndex, memEntity.id)
             this.db.periods.push(periodEntity)
             period.id = this.db.periodsSequenceIndex
+            period.membershipId = this.db.membershipsSequenceIndex
         }
 
         return {membership, periods: periods};

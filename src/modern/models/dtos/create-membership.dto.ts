@@ -1,8 +1,11 @@
+import { BillingInterval } from "../domain/billing-interval"
+import { PaymentMethod } from "../domain/payment-method"
+
 export interface CreateMembershipDto {
     name: string
     recurringPrice: number
-    paymentMethod: string,
-    billingInterval: string
+    paymentMethod: PaymentMethod,
+    billingInterval: BillingInterval
     billingPeriods: number
     validFrom: string
 }
